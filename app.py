@@ -31,9 +31,6 @@ st.set_page_config(page_title="Advanced Unit Converter", page_icon="🔄", layou
 st.title("🔄 Advanced Unit Converter")
 st.markdown("### Convert between different units with style! 🌟")
 
-# Sidebar for unit selection
-st.sidebar.header("Select Units")
-
 # Define valid unit pairs
 valid_units = {
     'Length': ['meters', 'kilometers', 'miles'],
@@ -42,12 +39,12 @@ valid_units = {
     'Volume': ['liters', 'milliliters']
 }
 
-# Select category
+# Select category in the sidebar
 category = st.sidebar.selectbox("Category", list(valid_units.keys()))
 
 # Select units based on category
-from_unit = st.sidebar.selectbox("From Unit", valid_units[category])
-to_unit = st.sidebar.selectbox("To Unit", valid_units[category])
+from_unit = st.selectbox("From Unit", valid_units[category])
+to_unit = st.selectbox("To Unit", valid_units[category])
 
 # Input value
 value = st.number_input("Enter the value to convert", min_value=0.0, step=0.1)
@@ -64,12 +61,9 @@ if st.button("Convert"):
             else:
                 formula = f"{value} {from_unit} * conversion factor = {result:.2f} {to_unit}"
             st.markdown(f"**Formula used:** {formula}")
-            st.snow()  # Add snow animation
+            st.balloons()
         else:
             st.error("Conversion not supported. 😞")
-
-# Add some animation
-st.balloons()
 
 # Feedback section
 st.markdown("### We value your feedback! 💬")
@@ -97,5 +91,6 @@ st.markdown(button_style, unsafe_allow_html=True)
 if st.button("Submit Feedback"):
     if feedback:
         st.success("Thank you for your feedback! 🙌")
+        st.balloons()
     else:
         st.warning("Please enter some feedback before submitting. ⚠️")
